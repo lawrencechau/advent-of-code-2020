@@ -1,5 +1,5 @@
 def solution1():
-  file = open('input_1.txt', 'r')
+  file = open('input', 'r')
   lines = file.readlines()
 
   seen= set()
@@ -7,10 +7,18 @@ def solution1():
     num = int(line)
     if 2020 - num in seen:
       print(num * (2020-num))
-      exit()
+      return 
     seen.add(num)
 
   print('No match found')
+
+def solution2():
+  file = open('input', 'r')
+  lines = file.readlines()
+  nums = sorted(int(num) for num in lines)
+
+  for i in range(len(nums)):
+    find_match(i, nums)
 
 def find_match(idx, nums):
   lo, hi = idx+1, len(nums)-1
@@ -27,12 +35,7 @@ def find_match(idx, nums):
         print(f"{nums[idx]} * {nums[lo]} * {nums[hi]} = {nums[idx] * nums[lo] * nums[hi]}")
         exit()
 
-def solution2():
-  file = open('input_1.txt', 'r')
-  lines = file.readlines()
-  nums = sorted(int(num) for num in lines)
-
-  for i in range(len(nums)):
-    find_match(i, nums)
-
+print('Part 1')
+solution1()
+print('Part 2')
 solution2()
