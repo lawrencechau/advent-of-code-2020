@@ -19,6 +19,8 @@ while dat[i]:
   else:
     rules[k] = v
   i += 1
+
+repeat = {'8': 0, '11': 0}
 print(rules)
 #n = len(dat[0])
 d = defaultdict(set)
@@ -26,11 +28,15 @@ d = defaultdict(set)
 def build(rule):
   print(f"==={rule}===")
   val = rules[rule]
-  if rule in d:
+  if rule in d and rule not in repeat:
+    return d[rule]
+  elif rule in repeat and repeat[rule] > 3:
     return d[rule]
   if '"' in val:
     d[rule].add(val[1:-1])
   else:
+    if rule in repeat:
+      repeat[rule] += 1
     subrules = val.split(' | ')
     #print(subrules)
     for sr in subrules:
